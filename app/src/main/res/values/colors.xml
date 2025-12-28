@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="splash_background_start">#3caea3</color>
+    <color name="splash_background_end">#20635c</color>
+    <color name="splash_dots">#80FFFFFF</color>
+    
+    <color name="login_background">#FFFCFCFC</color>
+    <color name="primary_teal">#3CAEA3</color>
+    <color name="text_primary">#333333</color>
+    <color name="text_secondary">#757575</color>
+    <color name="input_background">#FFF9F9F9</color>
+    <color name="input_stroke">#E0E0E0</color>
+
+    <color name="pronunciation_primary">#F4A261</color>
+    <color name="pinyin_green">#2A9D8F</color>
+
+    <color name="grammar_primary">#4DB6AC</color>
+    <color name="grammar_tips_bg">#FFFDE7</color>
+
+    <color name="vocab_primary">#B39DDB</color>
+</resources>

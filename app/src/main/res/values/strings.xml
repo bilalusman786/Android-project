@@ -1,0 +1,96 @@
+<resources>
+    <string name="app_name">AI Language Tutor</string>
+    <string name="app_title">LinguaAI</string>
+    <string name="app_subtitle">Master Chinese with AI</string>
+    
+    <string name="login_welcome">Welcome Back!</string>
+    <string name="login_subtitle">Sign in to continue learning</string>
+    <string name="email_hint">Email address</string>
+    <string name="password_hint">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="or">or</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="no_account">Don\'t have an account? </string>
+    <string name="sign_up">Sign Up</string>
+
+    <string name="signup_welcome">Create Account</string>
+    <string name="signup_subtitle">Start your Chinese learning journey</string>
+    <string name="create_account">Create Account</string>
+    <string name="already_have_account">Already have an account? </string>
+
+    <string name="home_welcome">Welcome back,</string>
+    <string name="home_user_name">Alex Chen</string>
+    <string name="daily_streak_label">Daily Streak</string>
+    <string name="daily_streak_value">7 Days</string>
+    <string name="todays_goal_label">Today\'s Goal</string>
+    <string name="todays_goal_value">3/5 lessons</string>
+    
+    <string name="menu_select_language">Select Language</string>
+    <string name="menu_pronunciation">Pronunciation Test</string>
+    <string name="menu_vocabulary">Vocabulary Builder</string>
+    <string name="menu_grammar">Grammar Correction</string>
+    <string name="menu_progress">Progress</string>
+    <string name="menu_profile">Profile &amp; Settings</string>
+
+    <string name="profile_title">Profile &amp; Settings</string>
+    <string name="profile_email">alex.chen@email.com</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="section_preferences">PREFERENCES</string>
+    <string name="pref_dark_mode">Dark Mode</string>
+    <string name="pref_notifications">Notifications</string>
+    <string name="section_settings">SETTINGS</string>
+    <string name="setting_language">Language</string>
+    <string name="setting_language_value">English</string>
+    <string name="setting_privacy">Privacy</string>
+    <string name="setting_help">Help &amp; Support</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="app_version">LinguaAI v1.0.0</string>
+
+    <string name="pronunciation_title">Pronunciation Test</string>
+    <string name="pronunciation_subtitle">Practice your speaking skills</string>
+    <string name="say_phrase">Say this phrase:</string>
+    <string name="practice_text_chinese">你好吗</string>
+    <string name="practice_text_pinyin">nǐ hǎo ma</string>
+    <string name="practice_text_english">How are you?</string>
+    <string name="tap_to_record">Tap to start recording</string>
+
+    <string name="grammar_title">Grammar Correction</string>
+    <string name="grammar_subtitle">AI-powered sentence analysis</string>
+    <string name="grammar_input_label">Enter your Chinese sentence</string>
+    <string name="grammar_hint">我昨天去图书馆...</string>
+    <string name="btn_check_grammar">Check Grammar</string>
+    <string name="tips_title">Tips</string>
+    <string name="tip_1">• Type or paste any Chinese sentence</string>
+    <string name="tip_2">• AI will detect grammar errors</string>
+    <string name="tip_3">• Get detailed explanations and corrections</string>
+
+    <string name="vocab_title">Vocabulary Builder</string>
+    <string name="vocab_subtitle">Choose a category</string>
+    <string name="vocab_greetings">Greetings</string>
+    <string name="vocab_greetings_count">24 words</string>
+    <string name="vocab_food">Food &amp; Dining</string>
+    <string name="vocab_food_count">48 words</string>
+    <string name="vocab_shopping">Shopping</string>
+    <string name="vocab_shopping_count">32 words</string>
+    <string name="vocab_travel">Travel</string>
+    <string name="vocab_travel_count">56 words</string>
+    <string name="vocab_numbers">Numbers</string>
+    <string name="vocab_numbers_count">20 words</string>
+
+    <string name="progress_title">Your Progress</string>
+    <string name="progress_subtitle">Track your learning journey</string>
+    <string name="stat_words_learned">Words Learned</string>
+    <string name="stat_accuracy">Accuracy</string>
+    <string name="stat_speaking_score">Speaking Score</string>
+    <string name="stat_day_streak">Day Streak</string>
+    <string name="weekly_activity">Weekly Activity</string>
+    <string name="total_hours">12h total</string>
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
+    <string name="sun">Sun</string>
+</resources>
