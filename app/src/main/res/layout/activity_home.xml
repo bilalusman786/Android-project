@@ -50,8 +50,7 @@
         android:src="@drawable/ic_settings_person"
         app:layout_constraintBottom_toBottomOf="@id/tvUserName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvWelcome"
-        app:tint="@color/themed_text_primary" />
+        app:layout_constraintTop_toTopOf="@id/tvWelcome" />
 
     <!-- Stats Card -->
     <androidx.cardview.widget.CardView
@@ -62,7 +61,6 @@
         android:layout_marginTop="24dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
-        app:cardBackgroundColor="@color/themed_surface"
         app:layout_constraintTop_toBottomOf="@id/tvUserName">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -77,8 +75,7 @@
                 android:src="@drawable/ic_chart"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/themed_text_primary" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvStreakLabel"
@@ -86,7 +83,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:text="@string/daily_streak_label"
-                android:textColor="@color/themed_text_secondary"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@id/ivStreak"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -97,7 +93,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:text="@string/daily_streak_value"
-                android:textColor="@color/themed_text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/ivStreak"
@@ -108,7 +103,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/todays_goal_label"
-                android:textColor="@color/themed_text_secondary"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -118,7 +112,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/todays_goal_value"
-                android:textColor="@color/themed_text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -147,7 +140,6 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
-            app:cardBackgroundColor="@color/themed_surface"
             app:cardCornerRadius="16dp"
             app:cardElevation="2dp">
 
@@ -176,7 +168,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="@string/menu_select_language"
-                    android:textColor="@color/themed_text_primary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -190,7 +181,6 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
-            app:cardBackgroundColor="@color/themed_surface"
             app:cardCornerRadius="16dp"
             app:cardElevation="2dp">
 
@@ -219,7 +209,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="@string/menu_pronunciation"
-                    android:textColor="@color/themed_text_primary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -233,7 +222,6 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
-            app:cardBackgroundColor="@color/themed_surface"
             app:cardCornerRadius="16dp"
             app:cardElevation="2dp">
 
@@ -262,7 +250,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="@string/menu_vocabulary"
-                    android:textColor="@color/themed_text_primary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -276,7 +263,6 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
-            app:cardBackgroundColor="@color/themed_surface"
             app:cardCornerRadius="16dp"
             app:cardElevation="2dp">
 
@@ -305,7 +291,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="@string/menu_grammar"
-                    android:textColor="@color/themed_text_primary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -319,7 +304,6 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
-            app:cardBackgroundColor="@color/themed_surface"
             app:cardCornerRadius="16dp"
             app:cardElevation="2dp">
 
@@ -348,7 +332,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="@string/menu_progress"
-                    android:textColor="@color/themed_text_primary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -362,7 +345,6 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
-            app:cardBackgroundColor="@color/themed_surface"
             app:cardCornerRadius="16dp"
             app:cardElevation="2dp">
 
@@ -383,8 +365,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_settings_person"
-                        app:tint="@color/themed_icon_tint" />
+                        android:src="@drawable/ic_settings_person" />
                 </FrameLayout>
 
                 <TextView
@@ -392,7 +373,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="@string/menu_profile"
-                    android:textColor="@color/themed_text_primary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>

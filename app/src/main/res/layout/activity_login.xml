@@ -4,18 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/themed_background"
     android:padding="24dp">
 
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="52dp"
-        android:contentDescription="@string/app_name"
         android:src="@drawable/ic_app_logo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,7 +22,6 @@
         android:layout_marginTop="24dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/login_welcome"
-        android:textColor="@color/themed_text_primary"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +35,6 @@
         android:layout_marginTop="8dp"
         android:fontFamily="sans-serif"
         android:text="@string/login_subtitle"
-        android:textColor="@color/themed_text_secondary"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,8 +52,6 @@
         android:autofillHints="emailAddress"
         android:inputType="textEmailAddress"
         android:paddingHorizontal="16dp"
-        android:textColor="@color/themed_text_primary"
-        android:textColorHint="@color/themed_text_secondary"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,8 +70,6 @@
         android:autofillHints="password"
         android:inputType="textPassword"
         android:paddingHorizontal="16dp"
-        android:textColor="@color/themed_text_primary"
-        android:textColorHint="@color/themed_text_secondary"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -129,7 +119,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/or"
-        android:textColor="@color/themed_text_secondary"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -169,7 +158,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:text="@string/continue_with_google"
-            android:textColor="@color/themed_text_primary"
             android:textSize="14sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -187,7 +175,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/no_account"
-            android:textColor="@color/themed_text_secondary"
             android:textSize="14sp" />
 
         <TextView
