@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Themed Colors (Dark) -->
+    <color name="themed_background">#121212</color>
+    <color name="themed_surface">#1E1E1E</color>
+    <color name="themed_text_primary">#E0E0E0</color>
+    <color name="themed_text_secondary">#9E9E9E</color>
+    <color name="themed_input_background">#2C2C2C</color>
+    <color name="themed_input_stroke">#424242</color>
+    <color name="themed_icon_tint">#9E9E9E</color>
+    
+    <!-- Tips Background (Dark) -->
+    <color name="grammar_tips_bg">#3E2723</color>
+</resources>

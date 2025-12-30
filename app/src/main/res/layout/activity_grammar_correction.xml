@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F8F8">
+    android:background="@color/themed_background">
 
     <!-- Header Section -->
     <View
@@ -21,10 +21,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_home_card"
-        android:backgroundTint="#33000000"
+        android:backgroundTint="#33FFFFFF"
         android:padding="8dp"
         android:src="@drawable/ic_back"
-        app:tint="#3E2723"
+        app:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/grammar_title"
-        android:textColor="#3E2723"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/ivBack"
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="@string/grammar_subtitle"
-        android:textColor="#3E2723"
+        android:textColor="#E0F2F1"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/tvTitle"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
@@ -61,6 +61,7 @@
         android:layout_marginTop="32dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
+        app:cardBackgroundColor="@color/themed_surface"
         app:layout_constraintTop_toBottomOf="@id/tvSubtitle">
 
         <LinearLayout
@@ -73,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/grammar_input_label"
-                android:textColor="@color/text_primary"
+                android:textColor="@color/themed_text_primary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -86,7 +87,8 @@
                 android:gravity="top|start"
                 android:hint="@string/grammar_hint"
                 android:padding="16dp"
-                android:textColor="@color/text_primary"
+                android:textColor="@color/themed_text_primary"
+                android:textColorHint="@color/themed_text_secondary"
                 android:textSize="16sp" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -107,8 +109,54 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <!-- Result Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="24dp"
+        android:visibility="gone"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="@color/themed_surface"
+        app:layout_constraintTop_toBottomOf="@id/cardInput">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Correction &amp; Explanation"
+                android:textColor="@color/themed_text_primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tvResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/themed_text_secondary"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
     <!-- Tips Card -->
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardTips"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
@@ -116,7 +164,7 @@
         app:cardCornerRadius="16dp"
         app:cardElevation="2dp"
         app:cardBackgroundColor="@color/grammar_tips_bg"
-        app:layout_constraintTop_toBottomOf="@id/cardInput">
+        app:layout_constraintTop_toBottomOf="@id/cardResult">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -141,7 +189,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="@string/tips_title"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/themed_text_primary"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -151,7 +199,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="@string/tip_1"
-                android:textColor="@color/text_secondary"
+                android:textColor="@color/themed_text_secondary"
                 android:textSize="14sp" />
 
             <TextView
@@ -159,7 +207,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/tip_2"
-                android:textColor="@color/text_secondary"
+                android:textColor="@color/themed_text_secondary"
                 android:textSize="14sp" />
 
             <TextView
@@ -167,7 +215,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/tip_3"
-                android:textColor="@color/text_secondary"
+                android:textColor="@color/themed_text_secondary"
                 android:textSize="14sp" />
 
         </LinearLayout>

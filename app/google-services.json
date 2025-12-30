@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "79145139020",
+    "project_id": "ailanguagetutor-8264e",
+    "storage_bucket": "ailanguagetutor-8264e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79145139020:android:aaab2b75d5510d6f2a6de9",
+        "android_client_info": {
+          "package_name": "com.example.ailanguagetutor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtwD3-tuE5pBRZwbTXUIh5qcPrNWFRfgM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

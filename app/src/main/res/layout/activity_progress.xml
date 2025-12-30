@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F8F8">
+    android:background="@color/themed_background">
 
     <!-- Header Section -->
     <View
@@ -21,7 +21,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_home_card"
-        android:backgroundTint="#33000000"
+        android:backgroundTint="#33FFFFFF"
         android:padding="8dp"
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,7 +77,8 @@
                     android:layout_weight="1"
                     android:layout_marginEnd="8dp"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/themed_surface">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -104,7 +105,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:text="248"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/themed_text_primary"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -113,7 +114,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="@string/stat_words_learned"
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/themed_text_secondary"
                             android:textSize="10sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -125,7 +126,8 @@
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/themed_surface">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -152,7 +154,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:text="86%"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/themed_text_primary"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -161,7 +163,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="@string/stat_accuracy"
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/themed_text_secondary"
                             android:textSize="10sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -182,7 +184,8 @@
                     android:layout_weight="1"
                     android:layout_marginEnd="8dp"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/themed_surface">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -209,7 +212,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:text="78%"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/themed_text_primary"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -218,7 +221,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="@string/stat_speaking_score"
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/themed_text_secondary"
                             android:textSize="10sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -230,7 +233,8 @@
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/themed_surface">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -257,7 +261,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:text="7"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/themed_text_primary"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -266,7 +270,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="@string/stat_day_streak"
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/themed_text_secondary"
                             android:textSize="10sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -279,7 +283,8 @@
                 android:layout_height="240dp"
                 android:layout_marginTop="24dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/themed_surface">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -291,7 +296,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/weekly_activity"
-                        android:textColor="@color/text_primary"
+                        android:textColor="@color/themed_text_primary"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
@@ -301,7 +306,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/total_hours"
-                        android:textColor="@color/text_secondary"
+                        android:textColor="@color/themed_text_secondary"
                         android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -334,13 +339,13 @@
                         android:orientation="horizontal"
                         app:layout_constraintBottom_toBottomOf="parent">
                         
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/mon" android:textSize="10sp" android:textColor="@color/text_secondary"/>
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/tue" android:textSize="10sp" android:textColor="@color/text_secondary"/>
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/wed" android:textSize="10sp" android:textColor="@color/text_secondary"/>
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/thu" android:textSize="10sp" android:textColor="@color/text_secondary"/>
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/fri" android:textSize="10sp" android:textColor="@color/text_secondary"/>
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/sat" android:textSize="10sp" android:textColor="@color/text_secondary"/>
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/sun" android:textSize="10sp" android:textColor="@color/text_secondary"/>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/mon" android:textSize="10sp" android:textColor="@color/themed_text_secondary"/>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/tue" android:textSize="10sp" android:textColor="@color/themed_text_secondary"/>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/wed" android:textSize="10sp" android:textColor="@color/themed_text_secondary"/>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/thu" android:textSize="10sp" android:textColor="@color/themed_text_secondary"/>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/fri" android:textSize="10sp" android:textColor="@color/themed_text_secondary"/>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/sat" android:textSize="10sp" android:textColor="@color/themed_text_secondary"/>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/sun" android:textSize="10sp" android:textColor="@color/themed_text_secondary"/>
 
                     </LinearLayout>
 

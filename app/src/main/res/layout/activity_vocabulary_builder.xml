@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F8F8">
+    android:background="@color/themed_background">
 
     <!-- Header Section -->
     <View
@@ -21,10 +21,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_home_card"
-        android:backgroundTint="#33000000"
+        android:backgroundTint="#33FFFFFF"
         android:padding="8dp"
         android:src="@drawable/ic_back"
-        app:tint="#311B92"
+        app:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/vocab_title"
-        android:textColor="#311B92"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/ivBack"
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="@string/vocab_subtitle"
-        android:textColor="#311B92"
+        android:textColor="#EDE7F6"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/tvTitle"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
@@ -74,7 +74,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/themed_surface">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -106,7 +107,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/vocab_greetings"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/themed_text_primary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -114,7 +115,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/vocab_greetings_count"
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/themed_text_secondary"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -133,7 +134,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/themed_surface">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -165,7 +167,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/vocab_food"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/themed_text_primary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -173,7 +175,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/vocab_food_count"
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/themed_text_secondary"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -192,7 +194,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/themed_surface">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -224,7 +227,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/vocab_shopping"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/themed_text_primary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -232,7 +235,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/vocab_shopping_count"
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/themed_text_secondary"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -251,7 +254,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/themed_surface">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -283,7 +287,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/vocab_travel"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/themed_text_primary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -291,7 +295,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/vocab_travel_count"
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/themed_text_secondary"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -310,7 +314,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/themed_surface">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -329,7 +334,7 @@
                             android:layout_height="24dp"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_chart"
-                            app:tint="@color/text_primary" />
+                            app:tint="@color/themed_text_primary" />
                     </FrameLayout>
 
                     <LinearLayout
@@ -343,7 +348,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/vocab_numbers"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/themed_text_primary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -351,7 +356,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/vocab_numbers_count"
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/themed_text_secondary"
                             android:textSize="14sp" />
                     </LinearLayout>
 

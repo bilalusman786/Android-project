@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F8F8">
+    android:background="@color/themed_background">
 
     <!-- Header Section -->
     <View
         android:id="@+id/headerBackground"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="220dp"
         android:background="@drawable/bg_home_header"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,8 +43,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerBackground">
+        app:layout_constraintTop_toBottomOf="@id/tvTitle">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,10 +57,10 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-40dp"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/themed_surface"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -91,7 +92,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text="@string/home_user_name"
-                        android:textColor="@color/text_primary"
+                        android:textColor="@color/themed_text_primary"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -100,7 +101,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="@string/profile_email"
-                        android:textColor="@color/text_secondary"
+                        android:textColor="@color/themed_text_secondary"
                         android:textSize="14sp" />
 
                     <com.google.android.material.button.MaterialButton
@@ -124,7 +125,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="@string/section_preferences"
-                android:textColor="@color/text_secondary"
+                android:textColor="@color/themed_text_secondary"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
@@ -132,7 +133,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="12dp"
+                app:cardBackgroundColor="@color/themed_surface"
+                app:cardCornerRadius="16dp"
                 app:cardElevation="2dp">
 
                 <LinearLayout
@@ -150,7 +152,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_settings_person" 
-                            app:tint="@color/text_secondary" />
+                            app:tint="@color/themed_icon_tint" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -158,10 +160,11 @@
                             android:layout_marginStart="16dp"
                             android:layout_weight="1"
                             android:text="@string/pref_dark_mode"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/themed_text_primary"
                             android:textSize="16sp" />
 
                         <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchDarkMode"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
@@ -181,7 +184,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_mic"
-                            app:tint="@color/text_secondary" />
+                            app:tint="@color/themed_icon_tint" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -189,7 +192,7 @@
                             android:layout_marginStart="16dp"
                             android:layout_weight="1"
                             android:text="@string/pref_notifications"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/themed_text_primary"
                             android:textSize="16sp" />
 
                         <com.google.android.material.switchmaterial.SwitchMaterial
@@ -207,7 +210,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="@string/section_settings"
-                android:textColor="@color/text_secondary"
+                android:textColor="@color/themed_text_secondary"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
@@ -215,7 +218,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                app:cardCornerRadius="12dp"
+                app:cardBackgroundColor="@color/themed_surface"
+                app:cardCornerRadius="16dp"
                 app:cardElevation="2dp">
 
                 <LinearLayout
@@ -234,7 +238,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_language"
-                            app:tint="@color/text_secondary" />
+                            app:tint="@color/themed_icon_tint" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -242,7 +246,7 @@
                             android:layout_marginStart="16dp"
                             android:layout_weight="1"
                             android:text="@string/setting_language"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/themed_text_primary"
                             android:textSize="16sp" />
 
                         <TextView
@@ -250,7 +254,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:text="@string/setting_language_value"
-                            android:textColor="@color/text_secondary"
+                            android:textColor="@color/themed_text_secondary"
                             android:textSize="14sp" />
 
                         <ImageView
@@ -282,7 +286,7 @@
                             android:layout_marginStart="16dp"
                             android:layout_weight="1"
                             android:text="@string/setting_privacy"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/themed_text_primary"
                             android:textSize="16sp" />
 
                         <ImageView
@@ -307,7 +311,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_settings_person"
-                            app:tint="@color/text_secondary" />
+                            app:tint="@color/themed_icon_tint" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -315,7 +319,7 @@
                             android:layout_marginStart="16dp"
                             android:layout_weight="1"
                             android:text="@string/setting_help"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/themed_text_primary"
                             android:textSize="16sp" />
 
                         <ImageView
@@ -332,7 +336,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginBottom="16dp"
-                android:backgroundTint="#FFFFFF"
+                android:backgroundTint="@color/themed_surface"
                 android:text="@string/sign_out"
                 android:textColor="#D32F2F"
                 android:textSize="16sp"
@@ -349,7 +353,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="24dp"
                 android:text="@string/app_version"
-                android:textColor="@color/text_secondary"
+                android:textColor="@color/themed_text_secondary"
                 android:textSize="12sp" />
 
         </LinearLayout>

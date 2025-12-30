@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F8F8">
+    android:background="@color/themed_background">
 
     <!-- Header Section -->
     <View
@@ -21,10 +21,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_home_card"
-        android:backgroundTint="#33000000"
+        android:backgroundTint="#33FFFFFF"
         android:padding="8dp"
         android:src="@drawable/ic_back"
-        app:tint="@color/text_primary"
+        app:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/pronunciation_title"
-        android:textColor="#3E2723"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/ivBack"
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="@string/pronunciation_subtitle"
-        android:textColor="#3E2723"
+        android:textColor="#FFE0B2"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/tvTitle"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
@@ -60,6 +60,7 @@
         android:layout_marginTop="32dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
+        app:cardBackgroundColor="@color/themed_surface"
         app:layout_constraintTop_toBottomOf="@id/tvSubtitle">
 
         <LinearLayout
@@ -73,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/say_phrase"
-                android:textColor="@color/text_secondary"
+                android:textColor="@color/themed_text_secondary"
                 android:textSize="14sp" />
 
             <TextView
@@ -81,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/practice_text_chinese"
-                android:textColor="@color/text_primary"
+                android:textColor="@color/themed_text_primary"
                 android:textSize="36sp"
                 android:textStyle="bold" />
 
@@ -99,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/practice_text_english"
-                android:textColor="@color/text_secondary"
+                android:textColor="@color/themed_text_secondary"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -122,7 +123,7 @@
             android:layout_height="32dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_mic"
-            app:tint="#3E2723" />
+            app:tint="@color/white" />
     </FrameLayout>
 
     <TextView
@@ -130,7 +131,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/tap_to_record"
-        android:textColor="@color/text_secondary"
+        android:textColor="@color/themed_text_secondary"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
