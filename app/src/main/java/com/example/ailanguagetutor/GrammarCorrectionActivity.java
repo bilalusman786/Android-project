@@ -1,6 +1,7 @@
 package com.example.ailanguagetutor;
 
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,27 +13,41 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import com.google.ai.client.generativeai.GenerativeModel;
-import com.google.ai.client.generativeai.java.GenerativeModelFutures;
-import com.google.ai.client.generativeai.type.Content;
-import com.google.ai.client.generativeai.type.GenerateContentResponse;
-import com.google.common.util.concurrent.FutureCallback;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
+import java.io.IOException;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class GrammarCorrectionActivity extends AppCompatActivity {
 
-    // Updated with the new API Key provided
-    private static final String API_KEY = "AIzaSyA2eF-FQ2QxLa6tRgQILExWCu9rlQmOW0g";
+    private static final String API_KEY = "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";
+    private static final String SITE_URL = "https://ailanguagetutor.example.com"; // Optional
+    private static final String APP_NAME = "AI Language Tutor"; // Optional
 
     private CardView cardResult;
     private TextView tvResult;
     private ProgressBar progressBar;
     private EditText etInput;
     private Button btnCheckGrammar;
+    private TextToSpeech tts;
+    private ImageView ivPlayAudio;
+
+    private final OkHttpClient client = new OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .build();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +62,29 @@ public class GrammarCorrectionActivity extends AppCompatActivity {
         cardResult = findViewById(R.id.cardResult);
         tvResult = findViewById(R.id.tvResult);
         progressBar = findViewById(R.id.progressBar);
+        ivPlayAudio = findViewById(R.id.ivPlayAudio);
+
+        // Initialize TTS
+        tts = new TextToSpeech(this, status -> {
+            if (status == TextToSpeech.SUCCESS) {
+                int result = tts.setLanguage(Locale.CHINESE);
+                if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    Toast.makeText(this, "Chinese language not supported on this device", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "TTS Initialization failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Play audio listener
+        if (ivPlayAudio != null) {
+            ivPlayAudio.setOnClickListener(v -> {
+                 String textToSpeak = tvResult.getText().toString();
+                 if (!textToSpeak.isEmpty() && tts != null) {
+                     tts.speak(textToSpeak, TextToSpeech.QUEUE_FLUSH, null, null);
+                 }
+            });
+        }
 
         btnCheckGrammar.setOnClickListener(v -> {
             String text = etInput.getText().toString();
@@ -59,63 +97,108 @@ public class GrammarCorrectionActivity extends AppCompatActivity {
     }
 
     private void performGrammarCheck(String text) {
-        if (API_KEY.equals("YOUR_API_KEY_HERE")) {
-            Toast.makeText(this, "Please set your API Key in GrammarCorrectionActivity.java", Toast.LENGTH_LONG).show();
-            return;
-        }
-
         // Show loading state
         btnCheckGrammar.setEnabled(false);
         cardResult.setVisibility(View.VISIBLE);
         tvResult.setVisibility(View.GONE);
+        if (ivPlayAudio != null) ivPlayAudio.setVisibility(View.INVISIBLE);
         progressBar.setVisibility(View.VISIBLE);
 
-        // Initialize Gemini
-        // Using "gemini-1.5-flash" as the standard model for the new API key
-        GenerativeModel gm = new GenerativeModel("gemini-1.5-flash", API_KEY);
-        GenerativeModelFutures model = GenerativeModelFutures.from(gm);
-
-        // Updated prompt to ask for specific format
         String prompt = "Check the following text for grammar errors. If there are errors, identify the mistake first, and then provide the correct sentence. Use the format:\n" +
                         "Mistake: [Description of mistake]\n" +
                         "Correction: [Corrected sentence]\n" +
                         "If there are no errors, just say 'No errors found'.\n\n" +
                         "Text: " + text;
 
-        Content content = new Content.Builder()
-                .addText(prompt)
+        JSONObject jsonBody = new JSONObject();
+        try {
+            // Switched to a stable and popular free model on OpenRouter
+            jsonBody.put("model", "mistralai/mistral-7b-instruct:free");
+            
+            JSONArray messages = new JSONArray();
+            JSONObject message = new JSONObject();
+            message.put("role", "user");
+            message.put("content", prompt);
+            messages.put(message);
+            
+            jsonBody.put("messages", messages);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            resetUIOnError("JSON Error");
+            return;
+        }
+
+        RequestBody body = RequestBody.create(jsonBody.toString(), MediaType.get("application/json; charset=utf-8"));
+        Request request = new Request.Builder()
+                .url("https://openrouter.ai/api/v1/chat/completions")
+                .post(body)
+                .addHeader("Authorization", "Bearer " + API_KEY)
+                .addHeader("HTTP-Referer", SITE_URL)
+                .addHeader("X-Title", APP_NAME)
                 .build();
 
-        Executor executor = Executors.newSingleThreadExecutor();
-        ListenableFuture<GenerateContentResponse> response = model.generateContent(content);
-
-        Futures.addCallback(response, new FutureCallback<GenerateContentResponse>() {
+        client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onSuccess(GenerateContentResponse result) {
-                String resultText = result.getText();
-                runOnUiThread(() -> {
-                    progressBar.setVisibility(View.GONE);
-                    tvResult.setVisibility(View.VISIBLE);
-                    tvResult.setText(resultText);
-                    btnCheckGrammar.setEnabled(true);
-                });
+            public void onFailure(Call call, IOException e) {
+                runOnUiThread(() -> resetUIOnError("Network error: " + e.getMessage()));
             }
 
             @Override
-            public void onFailure(Throwable t) {
-                runOnUiThread(() -> {
-                    progressBar.setVisibility(View.GONE);
-                    tvResult.setVisibility(View.VISIBLE);
-                    String errorMsg = t.getMessage();
-                    if (errorMsg != null && errorMsg.contains("404")) {
-                         tvResult.setText("Error: Model not found (404). \n\nThis usually means the API key is restricted or the API is not enabled in Google Cloud Console.\n\nRaw Error: " + errorMsg);
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    String errorBody = response.body() != null ? response.body().string() : "Unknown error";
+                    runOnUiThread(() -> resetUIOnError("API Error " + response.code() + ": " + errorBody));
+                    return;
+                }
+
+                try {
+                    String responseData = response.body().string();
+                    JSONObject jsonResponse = new JSONObject(responseData);
+                    JSONArray choices = jsonResponse.getJSONArray("choices");
+                    if (choices.length() > 0) {
+                        JSONObject firstChoice = choices.getJSONObject(0);
+                        JSONObject message = firstChoice.getJSONObject("message");
+                        String content = message.getString("content");
+
+                        runOnUiThread(() -> {
+                            progressBar.setVisibility(View.GONE);
+                            tvResult.setVisibility(View.VISIBLE);
+                            if (ivPlayAudio != null) ivPlayAudio.setVisibility(View.VISIBLE);
+                            tvResult.setText(content);
+                            btnCheckGrammar.setEnabled(true);
+                            
+                            // Also set click listener on text for TTS as fallback
+                            tvResult.setOnClickListener(v -> {
+                                 if (tts != null) {
+                                     tts.speak(content, TextToSpeech.QUEUE_FLUSH, null, null);
+                                 }
+                            });
+                        });
                     } else {
-                         tvResult.setText("Error checking grammar: " + errorMsg);
+                         runOnUiThread(() -> resetUIOnError("No response content found"));
                     }
-                    btnCheckGrammar.setEnabled(true);
-                    t.printStackTrace();
-                });
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    runOnUiThread(() -> resetUIOnError("Parsing error"));
+                }
             }
-        }, executor);
+        });
+    }
+
+    private void resetUIOnError(String errorMessage) {
+        progressBar.setVisibility(View.GONE);
+        tvResult.setVisibility(View.VISIBLE);
+        tvResult.setText(errorMessage);
+        btnCheckGrammar.setEnabled(true);
+    }
+    
+    @Override
+    protected void onDestroy() {
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onDestroy();
     }
 }

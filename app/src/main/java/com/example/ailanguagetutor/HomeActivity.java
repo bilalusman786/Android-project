@@ -21,11 +21,10 @@ public class HomeActivity extends AppCompatActivity {
         CardView cardProgress = findViewById(R.id.cardProgress);
         CardView cardProfile = findViewById(R.id.cardProfile);
 
-        // For "Select Language" (Placeholder, maybe re-show language selection or go to settings?)
+        // Repurposing "Select Language" card to open the AI Roleplay Chat
         cardLanguage.setOnClickListener(v -> {
-            // No specific screen for this yet, maybe just show a toast or nothing.
-            // Or maybe it goes to a language selection screen. 
-            // For now, I'll link it to Vocabulary as a placeholder or nothing.
+            Intent intent = new Intent(HomeActivity.this, ChatActivity.class);
+            startActivity(intent);
         });
 
         cardPronunciation.setOnClickListener(v -> {

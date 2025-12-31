@@ -1,57 +1,63 @@
 # AI Language Tutor
 
-An Android application designed to help users learn Chinese (Mandarin) using AI-powered features. This app leverages Google's Gemini AI to provide grammar correction, vocabulary building, and more.
+Welcome to AI Language Tutor, a modern Android application designed to help users learn Chinese (Mandarin) through a suite of powerful, AI-driven tools. This app leverages various AI models via the OpenRouter API to provide an interactive and effective learning experience.
 
-## Features
+## ✨ Features
 
-*   **Grammar Correction**: 
-    *   Input sentences in Chinese to check for grammar errors.
-    *   Receive detailed explanations and corrections powered by the Gemini AI model.
-*   **Vocabulary Builder**: (Feature description to be added as it's developed)
-*   **Pronunciation Test**: (Feature description to be added as it's developed)
-*   **Progress Tracking**: Monitor your learning journey.
+*   **AI Grammar Correction**: Input any Chinese sentence and receive instant feedback on grammatical errors, including a detailed explanation and the corrected sentence.
+*   **AI Pronunciation Test**: Practice your speaking skills! Select a phrase, record your voice, and get a comprehensive analysis of your pronunciation from an AI coach, including a score out of 100, word-by-word feedback, and actionable tips.
+*   **AI Vocabulary Builder**: Generate dynamic word lists for different categories and HSK levels. Each word comes with its Hanzi, Pinyin, English meaning, and an example sentence.
+*   **Text-to-Speech (TTS)**: Hear the correct pronunciation of any AI-generated text or correction by simply tapping on it.
+*   **Dark Mode**: A fully functional, persistent dark mode for comfortable learning in any lighting condition.
+*   **Modern UI**: A clean, professional, and responsive user interface built with Material Design 3 principles.
 
-## Screenshots
-
-*(Add screenshots of your app here)*
-
-## Tech Stack
+## 🛠️ Tech Stack & Architecture
 
 *   **Language**: Java
-*   **Minimum SDK**: 24
-*   **Compile SDK**: 36
-*   **AI Integration**: Google Gemini API (`generativeai` SDK)
-*   **Networking**: OkHttp
-*   **UI Components**: Material Design, ConstraintLayout, CardView
+*   **Platform**: Android (Min SDK 24, Compile SDK 36)
+*   **AI Integration**: [OpenRouter API](https://openrouter.ai/) for access to various language models (e.g., Mistral, Gemini).
+*   **Networking**: OkHttp for robust and efficient API communication.
+*   **Speech Recognition**: Android's native `SpeechRecognizer` for capturing user voice input.
+*   **Text-to-Speech**: Android's native `TextToSpeech` engine for audio playback.
+*   **UI**: Android Jetpack (ConstraintLayout, CardView), Material Design 3 Components.
+*   **Persistence**: SharedPreferences for saving user preferences like the app theme.
 
-## Setup & Installation
+## 🚀 Setup & Installation
 
-1.  **Clone the repository:**
+To get the project up and running, follow these steps:
+
+1.  **Clone the Repository**
     ```bash
-    git clone https://github.com/yourusername/AILanguageTutor.git
+    git clone https://github.com/your-username/ai-language-tutor.git
     ```
-2.  **Open in Android Studio:**
-    *   Open Android Studio and select "Open an existing Android Studio project".
-    *   Navigate to the cloned directory.
-3.  **Configure API Key:**
-    *   Obtain a Gemini API key from [Google AI Studio](https://aistudio.google.com/).
-    *   **Note:** For security, it is recommended to use `local.properties` or a secure build config. Currently, for testing purposes, the key is located in `GrammarCorrectionActivity.java`.
-    *   Open `app/src/main/java/com/example/ailanguagetutor/GrammarCorrectionActivity.java`.
-    *   Replace `API_KEY` with your actual key.
-4.  **Build and Run:**
-    *   Sync Gradle files.
+
+2.  **Open in Android Studio**
+    *   Launch Android Studio.
+    *   Select **File > Open** and navigate to the cloned project directory.
+
+3.  **Add Your OpenRouter API Key**
+    *   Sign up on [OpenRouter.ai](https://openrouter.ai/) to get your free API key.
+    *   You need to add this key in three places in the project:
+        *   `app/src/main/java/com/example/ailanguagetutor/GrammarCorrectionActivity.java`
+        *   `app/src/main/java/com/example/ailanguagetutor/VocabularyBuilderActivity.java`
+        *   `app/src/main/java/com/example/ailanguagetutor/PronunciationTestActivity.java`
+    *   In each file, find the line `private static final String OPENROUTER_API_KEY = "sk-or-...";` and replace the key with your own.
+
+4.  **Sync & Run**
+    *   Android Studio should prompt you to sync the Gradle project. If not, go to **File > Sync Project with Gradle Files**.
     *   Connect an Android device or start an emulator.
-    *   Click "Run".
+    *   Click the **Run** button (▶️) to build and install the app.
 
-## Troubleshooting
+## ⚠️ Permissions
 
-*   **Installation Failed (User Restricted)**: On Xiaomi/Redmi devices, enable "Install via USB" in Developer Options.
-*   **404 Model Not Found**: Ensure your API Key is valid, unrestricted (or correctly restricted), and that the "Generative Language API" is enabled in your Google Cloud Console project.
+The app requires the following permissions, which are already declared in the `AndroidManifest.xml`:
+*   `android.permission.INTERNET`: To communicate with the OpenRouter API.
+*   `android.permission.RECORD_AUDIO`: For the Pronunciation Test feature.
 
-## Contributing
+## 🤝 Contributing
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/your-username/ai-language-tutor/issues).
 
-## License
+## 📝 License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.

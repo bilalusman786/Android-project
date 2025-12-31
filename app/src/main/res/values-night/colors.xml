@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Themed Colors (Dark) -->
+    <color name="black">#FFFFFFFF</color>
+    <color name="white">#FF000000</color>
+    
+    <!-- Themed colors for Night Mode -->
     <color name="themed_background">#121212</color>
     <color name="themed_surface">#1E1E1E</color>
     <color name="themed_text_primary">#E0E0E0</color>
-    <color name="themed_text_secondary">#9E9E9E</color>
-    <color name="themed_input_background">#2C2C2C</color>
-    <color name="themed_input_stroke">#424242</color>
-    <color name="themed_icon_tint">#9E9E9E</color>
+    <color name="themed_text_secondary">#B0B0B0</color>
     
-    <!-- Tips Background (Dark) -->
-    <color name="grammar_tips_bg">#3E2723</color>
+    <!-- Maintain brand colors but maybe adjust brightness if needed -->
+    <color name="splash_background_start">#3caea3</color>
+    <color name="splash_background_end">#20635c</color>
+    <color name="splash_dots">#80FFFFFF</color>
+    <color name="pronunciation_primary">#F4A261</color>
+    <color name="pinyin_green">#2A9D8F</color>
+    <color name="grammar_primary">#4DB6AC</color>
+    <color name="grammar_tips_bg">#2C2C2C</color> <!-- Darker tips background -->
+    <color name="primary_teal">#80CBC4</color> <!-- Lighter teal for dark mode -->
+    <color name="vocab_primary">#CE93D8</color> <!-- Lighter purple for dark mode -->
+    
+    <!-- Input fields and Icons -->
+    <color name="themed_input_stroke">#424242</color>
+    <color name="themed_input_background">#2C2C2C</color>
+    <color name="themed_icon_tint">#B0B0B0</color>
 </resources>

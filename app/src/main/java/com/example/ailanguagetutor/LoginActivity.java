@@ -3,7 +3,6 @@ package com.example.ailanguagetutor;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,26 +17,20 @@ public class LoginActivity extends AppCompatActivity {
 
         Button btnSignIn = findViewById(R.id.btnSignIn);
         TextView tvSignUp = findViewById(R.id.tvSignUp);
-        LinearLayout btnGoogle = findViewById(R.id.btnGoogle);
-        TextView tvForgotPassword = findViewById(R.id.tvForgotPassword);
 
+        // Simulate successful login
         btnSignIn.setOnClickListener(v -> {
+            Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
         });
 
+        // Navigate to Signup screen
         tvSignUp.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
             startActivity(intent);
         });
-        
-        btnGoogle.setOnClickListener(v -> 
-            Toast.makeText(this, "Google Sign In clicked", Toast.LENGTH_SHORT).show()
-        );
-
-        tvForgotPassword.setOnClickListener(v -> 
-            Toast.makeText(this, "Forgot Password clicked", Toast.LENGTH_SHORT).show()
-        );
     }
 }

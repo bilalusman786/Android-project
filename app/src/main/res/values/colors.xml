@@ -11,4 +11,19 @@
     
     <color name="grammar_primary">#4DB6AC</color>
     <color name="grammar_tips_bg">#FFFDE7</color>
+    
+    <!-- Added missing colors -->
+    <color name="primary_teal">#009688</color>
+    <color name="vocab_primary">#9C27B0</color>
+    
+    <!-- Themed colors referenced in layouts -->
+    <color name="themed_background">#F5F5F5</color>
+    <color name="themed_surface">#FFFFFF</color>
+    <color name="themed_text_primary">#212121</color>
+    <color name="themed_text_secondary">#757575</color>
+    
+    <!-- Colors that were missing and causing build errors -->
+    <color name="themed_input_stroke">#E0E0E0</color>
+    <color name="themed_input_background">#FAFAFA</color>
+    <color name="themed_icon_tint">#757575</color>
 </resources>

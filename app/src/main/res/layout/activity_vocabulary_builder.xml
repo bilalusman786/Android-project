@@ -10,7 +10,7 @@
     <View
         android:id="@+id/headerBackground"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="220dp"
         android:background="@drawable/bg_vocab_header"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,12 +47,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="@string/vocab_subtitle"
-        android:textColor="#EDE7F6"
+        android:textColor="#E0F2F1"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/tvTitle"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
-    <!-- Categories List -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -64,18 +63,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="24dp"
-            android:paddingBottom="24dp">
+            android:padding="16dp">
 
-            <!-- Item 1: Greetings -->
+            <!-- Category: Greetings -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardGreetings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/themed_surface"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/themed_surface">
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -87,13 +85,14 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="@drawable/bg_home_card"
-                        android:backgroundTint="#F5F5F5">
+                        android:backgroundTint="#FFE0B2">
 
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_wave" />
+                            android:src="@drawable/ic_wave"
+                            app:tint="#F57C00" />
                     </FrameLayout>
 
                     <LinearLayout
@@ -114,28 +113,29 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:text="@string/vocab_greetings_count"
                             android:textColor="@color/themed_text_secondary"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_chevron_right"
-                        app:tint="#B39DDB" />
+                        app:tint="@color/themed_icon_tint" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Item 2: Food & Dining -->
+            <!-- Category: Food -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardFood"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/themed_surface"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/themed_surface">
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -147,13 +147,14 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="@drawable/bg_home_card"
-                        android:backgroundTint="#F5F5F5">
+                        android:backgroundTint="#C8E6C9">
 
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_food" />
+                            android:src="@drawable/ic_food"
+                            app:tint="#388E3C" />
                     </FrameLayout>
 
                     <LinearLayout
@@ -174,28 +175,29 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:text="@string/vocab_food_count"
                             android:textColor="@color/themed_text_secondary"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_chevron_right"
-                        app:tint="#B39DDB" />
+                        app:tint="@color/themed_icon_tint" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Item 3: Shopping -->
+            <!-- Category: Shopping -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardShopping"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/themed_surface"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/themed_surface">
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -207,13 +209,14 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="@drawable/bg_home_card"
-                        android:backgroundTint="#F5F5F5">
+                        android:backgroundTint="#BBDEFB">
 
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_shopping_bag" />
+                            android:src="@drawable/ic_shopping_bag"
+                            app:tint="#1976D2" />
                     </FrameLayout>
 
                     <LinearLayout
@@ -234,28 +237,29 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:text="@string/vocab_shopping_count"
                             android:textColor="@color/themed_text_secondary"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_chevron_right"
-                        app:tint="#B39DDB" />
+                        app:tint="@color/themed_icon_tint" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Item 4: Travel -->
+            <!-- Category: Travel -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardTravel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/themed_surface"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/themed_surface">
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -267,13 +271,14 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="@drawable/bg_home_card"
-                        android:backgroundTint="#F5F5F5">
+                        android:backgroundTint="#E1BEE7">
 
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_plane" />
+                            android:src="@drawable/ic_plane"
+                            app:tint="#7B1FA2" />
                     </FrameLayout>
 
                     <LinearLayout
@@ -294,28 +299,29 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:text="@string/vocab_travel_count"
                             android:textColor="@color/themed_text_secondary"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_chevron_right"
-                        app:tint="#B39DDB" />
+                        app:tint="@color/themed_icon_tint" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Item 5: Numbers -->
+            <!-- Category: Numbers -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardNumbers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/themed_surface"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/themed_surface">
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -327,14 +333,14 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="@drawable/bg_home_card"
-                        android:backgroundTint="#F5F5F5">
+                        android:backgroundTint="#B2DFDB">
 
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_chart"
-                            app:tint="@color/themed_text_primary" />
+                            app:tint="#00695C" />
                     </FrameLayout>
 
                     <LinearLayout
@@ -355,20 +361,20 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:text="@string/vocab_numbers_count"
                             android:textColor="@color/themed_text_secondary"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_chevron_right"
-                        app:tint="#B39DDB" />
+                        app:tint="@color/themed_icon_tint" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
