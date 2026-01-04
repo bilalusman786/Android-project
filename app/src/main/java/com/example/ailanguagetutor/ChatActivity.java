@@ -31,7 +31,7 @@ import okhttp3.Response;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private static final String OPENROUTER_API_KEY = "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";
+    private static final String OPENROUTER_API_KEY = "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";
     // Switched to a more standard/available model ID
     private static final String MODEL_ID = "mistralai/mistral-7b-instruct:free";
 

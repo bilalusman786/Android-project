@@ -1,71 +1,88 @@
-# AI Language Tutor
+# Lingua Ai
 
-AI Language Tutor is an Android application designed to help users learn Chinese through interactive AI-powered features. The app integrates advanced language models (via OpenRouter) and Text-to-Speech (TTS) capabilities to provide a comprehensive learning experience.
+## Project Overview
 
-## Features
+Lingua Ai is an advanced Android application engineered to provide an immersive and interactive experience for users learning the Chinese language. The application leverages AI-powered services to deliver a suite of tools that target various aspects of language acquisition, including conversation, pronunciation, vocabulary, and grammar.
 
-*   **AI Roleplay Chat**: Engage in natural conversations with an AI tutor in Chinese.
-    *   **Translation**: Translate user messages to Chinese and AI responses to English.
-    *   **Text-to-Speech**: Listen to the AI's Chinese responses with a single tap.
-*   **Pronunciation Test**: Practice speaking Chinese phrases.
-    *   **Speech Recognition**: Uses the device's speech recognizer to transcribe your pronunciation.
-    *   **AI Feedback**: Get detailed feedback and scoring on your pronunciation from the AI.
-    *   **AI Sentence Generation**: Generate example sentences using specific words, complete with Pinyin and English translation.
-    *   **Listen & Learn**: Hear the correct pronunciation of phrases and generated sentences.
-*   **Vocabulary Builder**: Generate custom vocabulary lists based on categories (e.g., Greetings, Food, Travel) and proficiency levels (HSK).
-*   **Grammar Correction**: Input sentences to get instant grammar corrections and explanations.
-*   **Progress Tracking**: (Visual placeholder) View stats like words learned, accuracy, and daily streaks.
-*   **Profile & Settings**: Manage user preferences, including a Dark Mode toggle.
+---
 
-## Tech Stack
+## Core Features
 
-*   **Platform**: Android (Java)
-*   **Networking**: OkHttp for API requests.
-*   **AI Integration**: OpenRouter API (Mistral 7B / Google Gemma 2) for chat, feedback, and content generation.
-*   **Speech Services**:
-    *   `android.speech.SpeechRecognizer` for speech-to-text.
-    *   `android.speech.tts.TextToSpeech` for text-to-speech.
-*   **UI Components**: Material Design components, RecyclerView, ConstraintLayout.
+-   **AI-Powered Conversational Practice**: Engage in dynamic role-playing chats with an AI tutor. This feature includes on-demand translation for both user and AI messages and text-to-speech functionality to hear correct pronunciation.
 
-## Setup & Installation
+-   **Pronunciation Analysis**: Users can select from an extensive list of phrases to practice their speaking skills. The application provides AI-driven feedback, scoring, and detailed analysis of the user's pronunciation.
+
+-   **Dynamic Sentence Generation**: Generate contextual example sentences from a selected word, complete with Pinyin and an English translation, to better understand its usage.
+
+-   **Vocabulary Expansion**: Build custom vocabulary lists based on HSK proficiency levels and specific categories such as greetings, dining, and travel.
+
+-   **Grammar Correction Engine**: Submit Chinese sentences to receive immediate, AI-powered grammatical analysis, including error identification and correction.
+
+-   **User Customization**: A user profile section allows for application settings management, including a theme toggle for dark mode.
+
+---
+
+## Technical Architecture
+
+-   **Platform**: Android
+-   **Language**: Java
+-   **Core Libraries**:
+    -   `androidx.appcompat`, `androidx.activity`, `androidx.constraintlayout`
+    -   `com.google.android.material` for UI components.
+    -   `com.squareup.okhttp3:okhttp` for robust and efficient network operations.
+-   **AI and Machine Learning Integration**:
+    -   Utilizes the **OpenRouter API** to access various large language models for generating chat responses, translations, and grammatical feedback.
+-   **Speech and Language Processing**:
+    -   `android.speech.SpeechRecognizer` for converting spoken user input into text.
+    -   `android.speech.tts.TextToSpeech` for synthesizing and playing back Chinese text.
+
+---
+
+## Setup and Installation Guide
+
+To build and run this project locally, follow these steps:
 
 1.  **Clone the Repository**:
     ```bash
-    git clone https://github.com/yourusername/AILanguageTutor.git
+    git clone <your-repository-url>
     ```
+
 2.  **Open in Android Studio**:
-    *   Launch Android Studio.
-    *   Select "Open" and navigate to the project directory.
-3.  **Configure API Key**:
-    *   The project uses OpenRouter for AI features.
-    *   Locate the `OPENROUTER_API_KEY` constant in the following files and ensure a valid key is set:
-        *   `ChatActivity.java`
-        *   `PronunciationTestActivity.java`
-        *   `VocabularyBuilderActivity.java`
-        *   `GrammarCorrectionActivity.java`
-    *   *Note: For security in a production app, use `local.properties` or a secure backend proxy.*
-4.  **Permissions**:
-    *   The app requires `Internet` and `Record Audio` permissions, which are declared in `AndroidManifest.xml`.
-    *   On Android 11+ (API 30+), ensure the Google App is installed/enabled for speech recognition visibility.
-5.  **Build and Run**:
-    *   Sync Gradle files.
-    *   Run the app on an Android Emulator or Physical Device.
-    *   *Note: For TTS to work, ensure a Chinese language pack is installed on the device's Text-to-Speech engine.*
+    -   Launch Android Studio.
+    -   Select "Open" from the welcome screen and navigate to the cloned project directory.
 
-## Usage Guide
+3.  **Configure API Credentials**:
+    -   This project requires a valid API key from OpenRouter to function. Obtain a key from [openrouter.ai](https://openrouter.ai/).
+    -   The API key is defined as a `String` constant named `OPENROUTER_API_KEY` within the following files. You must replace the placeholder value with your actual key:
+        -   `app/src/main/java/com/example/ailanguagetutor/ChatActivity.java`
+        -   `app/src/main/java/com/example/ailanguagetutor/ChatAdapter.java`
+        -   `app/src/main/java/com/example/ailanguagetutor/PronunciationTestActivity.java`
+        -   `app/src/main/java/com/example/ailanguagetutor/VocabularyBuilderActivity.java`
+        -   `app/src/main/java/com/example/ailanguagetutor/GrammarCorrectionActivity.java`
 
-*   **Chat**: Tap "AI Roleplay Chat" on the home screen. Type a message to start. Tap "Translate" under messages to see translations. Tap the speaker icon to hear the AI.
-*   **Pronunciation**: Tap "Pronunciation Test". Select a phrase, tap the microphone button, and speak. Wait for AI analysis. Use "Make a Sentence with AI" to expand your learning.
-*   **Vocab**: Tap "Vocabulary Builder" and select a category to get a generated list of words.
-*   **Grammar**: Tap "Grammar Correction", type a sentence, and hit "Check Grammar".
+    *Note: For production environments, it is strongly recommended to store API keys securely using Gradle properties, a backend service, or the Android Keystore system rather than hardcoding them.* 
+
+4.  **Build and Run**:
+    -   Allow Gradle to sync and download the required dependencies.
+    -   Select a target device (emulator or physical device) and run the application.
+    -   Ensure the target device has a Text-to-Speech engine that supports Chinese (e.g., Google TTS).
+
+---
 
 ## Troubleshooting
 
-*   **API Error 401**: Your API Key is missing or invalid. Update the `OPENROUTER_API_KEY` constant in the relevant activity files.
-*   **API Error 404**: The selected AI model might be unavailable. Switch the `MODEL_ID` in the code to a different free model (e.g., `mistralai/mistral-7b-instruct:free`).
-*   **Voice Recognition Error**: Ensure you have granted microphone permissions and that the Google App is installed on your device.
-*   **No Sound**: Check your device volume and ensure a Text-to-Speech engine (like Google TTS) is installed and supports Chinese.
+-   **401 Unauthorized Error**: This indicates an invalid or expired API key. Please verify that the `OPENROUTER_API_KEY` constants are set correctly in all relevant files.
+
+-   **404 Not Found Error**: The specified AI model may be unavailable. The model is defined by the `MODEL_ID` constant in the activity files. Consider switching to a different free-tier model available on OpenRouter.
+
+-   **Rate Limit Exceeded**: This error occurs when the number of API requests exceeds the limit for your key. Please wait for the rate limit to reset or generate a new key.
+
+-   **Speech Recognition Issues**: Ensure the application has been granted microphone permissions. On emulators, verify that the Google App is installed and that the host microphone is properly configured.
+
+-   **Text-to-Speech Failure**: Check device media volume and confirm that a Chinese language pack is installed and enabled in the device's TTS settings.
+
+---
 
 ## License
 
-[MIT License](LICENSE) (or your preferred license)
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
