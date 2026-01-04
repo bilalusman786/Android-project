@@ -25,7 +25,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_back"
-                android:layout_marginEnd="16dp" />
+                android:layout_marginEnd="16dp"
+                android:contentDescription="Back"
+                android:padding="8dp" />
 
             <TextView
                 android:id="@+id/tvToolbarTitle"
@@ -65,7 +67,9 @@
             android:layout_weight="1"
             android:hint="Type your message..."
             android:background="@drawable/bg_login_input"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:textColor="@color/themed_text_primary"
+            android:textColorHint="@color/themed_text_secondary"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnSendMessage"
@@ -73,7 +77,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:src="@drawable/ic_send"
-            app:tint="@color/white" />
+            app:tint="@color/white"
+            app:backgroundTint="@color/primary_teal" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

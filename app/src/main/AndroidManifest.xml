@@ -4,6 +4,18 @@
 
     <!-- Add Internet Permission -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Add Record Audio Permission -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    
+    <!-- Add Query All Packages Permission for Speech Recognition on Android 11+ -->
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" tools:ignore="QueryAllPackagesPermission" />
+
+    <queries>
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
+        </intent>
+        <package android:name="com.google.android.googlequicksearchbox"/>
+    </queries>
 
     <application
         android:allowBackup="true"

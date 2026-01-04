@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -16,5 +17,30 @@
         android:text="User message here"
         android:textColor="@color/white"
         android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvTranslate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Translate to Chinese"
+        android:textSize="12sp"
+        android:textColor="@color/primary_teal"
+        android:layout_marginTop="4dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <TextView
+        android:id="@+id/tvTranslatedMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/themed_text_secondary"
+        android:textSize="14sp"
+        android:visibility="gone"
+        tools:text="Translated message here" />
 
 </LinearLayout>

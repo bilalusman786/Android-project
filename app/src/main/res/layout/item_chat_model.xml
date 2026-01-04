@@ -7,16 +7,36 @@
     android:padding="8dp"
     android:gravity="start">
 
-    <TextView
-        android:id="@+id/tvChatMessage"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_chat_model"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="10dp"
-        android:text="AI model message here"
-        android:textColor="@color/themed_text_primary"
-        android:textSize="16sp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tvChatMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_chat_model"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
+            android:text="AI model message here"
+            android:textColor="@color/themed_text_primary"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/ivSpeak"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_mic"
+            android:padding="6dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            app:tint="@color/primary_teal"
+            xmlns:app="http://schemas.android.com/apk/res-auto"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tvTranslate"

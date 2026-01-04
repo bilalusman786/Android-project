@@ -7,14 +7,16 @@ import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
@@ -40,14 +42,15 @@ public class PronunciationTestActivity extends AppCompatActivity implements Phra
 
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
     // API Key for OpenRouter
-    private static final String OPENROUTER_API_KEY = "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";
+    private static final String OPENROUTER_API_KEY = "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";
 
     private RecyclerView phrasesRecyclerView;
-    private TextView tvSelectedHanzi, tvSelectedPinyin, tvUserTranscript, tvAiFeedback;
-    private MaterialButton btnRecord;
-    private View cardAiFeedback;
-
-    private SpeechRecognizer speechRecognizer;
+    private TextView tvSelectedHanzi, tvSelectedPinyin;
+    private MaterialButton btnSpeak, btnGenerateSentence;
+    private TextView tvGeneratedSentence, tvGeneratedPinyin, tvTranslateSentence, tvTranslatedSentence;
+    private ImageView btnSpeakSentence;
+    
+    private TextToSpeech tts;
     private OkHttpClient client = new OkHttpClient();
     private Phrase currentPhrase;
 
@@ -59,35 +62,124 @@ public class PronunciationTestActivity extends AppCompatActivity implements Phra
         findViewById(R.id.ivBack).setOnClickListener(v -> finish());
         tvSelectedHanzi = findViewById(R.id.tvSelectedHanzi);
         tvSelectedPinyin = findViewById(R.id.tvSelectedPinyin);
-        tvUserTranscript = findViewById(R.id.tvUserTranscript);
-        tvAiFeedback = findViewById(R.id.tvAiFeedback);
-        btnRecord = findViewById(R.id.btnRecord);
-        cardAiFeedback = findViewById(R.id.cardAiFeedback);
+        btnSpeak = findViewById(R.id.btnSpeak);
+        
+        btnGenerateSentence = findViewById(R.id.btnGenerateSentence);
+        tvGeneratedSentence = findViewById(R.id.tvGeneratedSentence);
+        btnSpeakSentence = findViewById(R.id.btnSpeakSentence);
+        tvGeneratedPinyin = findViewById(R.id.tvGeneratedPinyin);
+        tvTranslateSentence = findViewById(R.id.tvTranslateSentence);
+        tvTranslatedSentence = findViewById(R.id.tvTranslatedSentence);
 
         setupPhraseList();
+        initializeTTS();
 
-        btnRecord.setOnClickListener(v -> {
-            if (currentPhrase == null) {
-                Toast.makeText(this, "Please select a phrase first", Toast.LENGTH_SHORT).show();
-                return;
+        btnSpeak.setOnClickListener(v -> {
+            if (currentPhrase != null && tts != null) {
+                tts.speak(currentPhrase.getHanzi(), TextToSpeech.QUEUE_FLUSH, null, null);
             }
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, REQUEST_RECORD_AUDIO_PERMISSION);
+        });
+        
+        btnGenerateSentence.setOnClickListener(v -> {
+            if (currentPhrase != null) {
+                generateSentence(currentPhrase.getHanzi());
             } else {
-                startListening();
+                 Toast.makeText(this, "Please select a phrase first", Toast.LENGTH_SHORT).show();
             }
         });
 
-        initializeSpeechRecognizer();
+        btnSpeakSentence.setOnClickListener(v -> {
+            String sentence = tvGeneratedSentence.getText().toString();
+            if (!sentence.isEmpty() && tts != null) {
+                tts.speak(sentence, TextToSpeech.QUEUE_FLUSH, null, null);
+            }
+        });
+        
+        tvTranslateSentence.setOnClickListener(v -> {
+            if (tvTranslatedSentence.getVisibility() == View.VISIBLE) {
+                tvTranslatedSentence.setVisibility(View.GONE);
+                tvTranslateSentence.setText("Translate");
+            } else {
+                tvTranslatedSentence.setVisibility(View.VISIBLE);
+                tvTranslateSentence.setText("Hide Translation");
+            }
+        });
     }
 
     private void setupPhraseList() {
         List<Phrase> phrases = new ArrayList<>();
+        // Basic Greetings
         phrases.add(new Phrase("你好", "nǐ hǎo", "Hello"));
         phrases.add(new Phrase("谢谢", "xièxiè", "Thank you"));
         phrases.add(new Phrase("不客气", "bù kèqì", "You're welcome"));
         phrases.add(new Phrase("对不起", "duìbuqǐ", "I'm sorry"));
         phrases.add(new Phrase("早上好", "zǎoshang hǎo", "Good morning"));
+        phrases.add(new Phrase("再见", "zàijiàn", "Goodbye"));
+        phrases.add(new Phrase("晚上好", "wǎnshang hǎo", "Good evening"));
+        
+        // Polite Expressions
+        phrases.add(new Phrase("请问", "qǐngwèn", "Excuse me / May I ask"));
+        phrases.add(new Phrase("没关系", "méi guānxi", "It doesn't matter"));
+        phrases.add(new Phrase("是", "shì", "Yes"));
+        phrases.add(new Phrase("不是", "bú shì", "No"));
+        phrases.add(new Phrase("好的", "hǎo de", "OK / Good"));
+        
+        // People & Pronouns
+        phrases.add(new Phrase("我", "wǒ", "I / Me"));
+        phrases.add(new Phrase("你", "nǐ", "You"));
+        phrases.add(new Phrase("他", "tā", "He / Him"));
+        phrases.add(new Phrase("她", "tā", "She / Her"));
+        phrases.add(new Phrase("我们", "wǒmen", "We / Us"));
+        phrases.add(new Phrase("朋友", "péngyou", "Friend"));
+        phrases.add(new Phrase("老师", "lǎoshī", "Teacher"));
+        phrases.add(new Phrase("学生", "xuésheng", "Student"));
+        
+        // Daily Life
+        phrases.add(new Phrase("喝水", "hē shuǐ", "Drink water"));
+        phrases.add(new Phrase("吃饭", "chī fàn", "Eat rice / Have a meal"));
+        phrases.add(new Phrase("面条", "miàntiáo", "Noodles"));
+        phrases.add(new Phrase("苹果", "píngguǒ", "Apple"));
+        phrases.add(new Phrase("茶", "chá", "Tea"));
+        phrases.add(new Phrase("咖啡", "kāfēi", "Coffee"));
+        phrases.add(new Phrase("快乐", "kuàilè", "Happy"));
+        phrases.add(new Phrase("喜欢", "xǐhuan", "Like"));
+        phrases.add(new Phrase("爱", "ài", "Love"));
+        
+        // Time
+        phrases.add(new Phrase("今天", "jīntiān", "Today"));
+        phrases.add(new Phrase("明天", "míngtiān", "Tomorrow"));
+        phrases.add(new Phrase("昨天", "zuótiān", "Yesterday"));
+        phrases.add(new Phrase("现在", "xiànzài", "Now"));
+        phrases.add(new Phrase("几点", "jǐ diǎn", "What time"));
+        
+        // Shopping & Questions
+        phrases.add(new Phrase("多少钱", "duōshao qián", "How much money"));
+        phrases.add(new Phrase("太贵了", "tài guì le", "Too expensive"));
+        phrases.add(new Phrase("便宜", "piányi", "Cheap"));
+        phrases.add(new Phrase("哪里", "nǎli", "Where"));
+        phrases.add(new Phrase("什么", "shénme", "What"));
+        
+        // Adjectives & Descriptions
+        phrases.add(new Phrase("名字", "míngzi", "Name"));
+        phrases.add(new Phrase("高兴", "gāoxìng", "Happy / Glad"));
+        phrases.add(new Phrase("认识", "rènshi", "Know / Recognize"));
+        phrases.add(new Phrase("漂亮", "piàoliang", "Beautiful"));
+        phrases.add(new Phrase("帅", "shuài", "Handsome"));
+        
+        // Weather
+        phrases.add(new Phrase("天气", "tiānqì", "Weather"));
+        phrases.add(new Phrase("热", "rè", "Hot"));
+        phrases.add(new Phrase("冷", "lěng", "Cold"));
+        phrases.add(new Phrase("下雨", "xià yǔ", "Rain"));
+        
+        // Actions
+        phrases.add(new Phrase("学习", "xuéxí", "Study"));
+        phrases.add(new Phrase("工作", "gōngzuò", "Work"));
+        phrases.add(new Phrase("休息", "xiūxi", "Rest"));
+        phrases.add(new Phrase("睡觉", "shuìjiào", "Sleep"));
+        phrases.add(new Phrase("起床", "qǐchuáng", "Get up"));
+        phrases.add(new Phrase("坐", "zuò", "Sit"));
+        phrases.add(new Phrase("走", "zǒu", "Walk / Go"));
 
         // Instead of a RecyclerView, we use a dialog for simplicity for now
         tvSelectedHanzi.setOnClickListener(v -> showPhraseSelectionDialog(phrases));
@@ -112,76 +204,38 @@ public class PronunciationTestActivity extends AppCompatActivity implements Phra
         this.currentPhrase = phrase;
         tvSelectedHanzi.setText(phrase.getHanzi());
         tvSelectedPinyin.setText(phrase.getPinyin());
-        tvUserTranscript.setText("Your pronunciation will appear here...");
-        cardAiFeedback.setVisibility(View.GONE);
+        
+        // Reset generated UI
+        tvGeneratedSentence.setVisibility(View.GONE);
+        btnSpeakSentence.setVisibility(View.GONE);
+        tvGeneratedPinyin.setVisibility(View.GONE);
+        tvTranslateSentence.setVisibility(View.GONE);
+        tvTranslatedSentence.setVisibility(View.GONE);
     }
 
-    private void initializeSpeechRecognizer() {
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
-        speechRecognizer.setRecognitionListener(new RecognitionListener() {
-            @Override
-            public void onReadyForSpeech(Bundle params) {
-                btnRecord.setText("Listening...");
-                btnRecord.setIconResource(R.drawable.ic_mic_active);
-            }
-
-            @Override
-            public void onResults(Bundle results) {
-                ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                if (matches != null && !matches.isEmpty()) {
-                    String userText = matches.get(0);
-                    tvUserTranscript.setText(userText);
-                    analyzePronunciation(currentPhrase.getHanzi(), userText);
+    private void initializeTTS() {
+        tts = new TextToSpeech(this, status -> {
+            if (status == TextToSpeech.SUCCESS) {
+                int result = tts.setLanguage(Locale.CHINESE);
+                if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    Toast.makeText(this, "Chinese language not supported on this device", Toast.LENGTH_SHORT).show();
                 }
-                btnRecord.setText("Tap to Record");
-                btnRecord.setIconResource(R.drawable.ic_mic);
+            } else {
+                Toast.makeText(this, "TTS Initialization failed", Toast.LENGTH_SHORT).show();
             }
-
-            @Override
-            public void onError(int error) {
-                Toast.makeText(PronunciationTestActivity.this, "Error: " + error, Toast.LENGTH_SHORT).show();
-                btnRecord.setText("Tap to Record");
-                btnRecord.setIconResource(R.drawable.ic_mic);
-            }
-
-            @Override public void onBeginningOfSpeech() {}
-            @Override public void onRmsChanged(float rmsdB) {}
-            @Override public void onBufferReceived(byte[] buffer) {}
-            @Override public void onEndOfSpeech() {}
-            @Override public void onPartialResults(Bundle partialResults) {}
-            @Override public void onEvent(int eventType, Bundle params) {}
         });
     }
 
-    private void startListening() {
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "zh-CN");
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Say the phrase now");
-        speechRecognizer.startListening(intent);
-    }
+    private void generateSentence(String word) {
+        // Show loading state
+        tvGeneratedSentence.setVisibility(View.VISIBLE);
+        tvGeneratedSentence.setText("Generating sentence...");
+        btnGenerateSentence.setEnabled(false);
 
-    private void analyzePronunciation(String correctPhrase, String userPhrase) {
-        cardAiFeedback.setVisibility(View.VISIBLE);
-        tvAiFeedback.setText("Analyzing...");
+        String prompt = "Create a simple Chinese sentence using the word '" + word + "'. " +
+                        "Provide the output in the format: [Chinese Sentence] ||| [Pinyin] ||| [English Translation]";
 
-        // Improved prompt for detailed feedback
-        String prompt = String.format(
-            "You are a Chinese language pronunciation coach. The user is trying to say: '%s'. " +
-            "The speech-to-text recognized their attempt as: '%s'. " +
-            "Please provide an evaluation with a score out of 100, and a word-by-word breakdown of their pronunciation. " +
-            "For each character in the original phrase, comment on the tones and clarity. Keep feedback concise and encouraging. " +
-            "Format your response strictly as: \n" +
-            "Overall Score: [score]/100\n\n" +
-            "Word-by-word Feedback:\n" +
-            "- [Character 1]: [Feedback on Character 1]\n" +
-            "- [Character 2]: [Feedback on Character 2]\n" +
-            "... \n\n" +
-            "Quick Tip: [A single actionable tip]",
-            correctPhrase, userPhrase
-        );
-
-         JSONObject jsonBody = new JSONObject();
+        JSONObject jsonBody = new JSONObject();
         try {
             jsonBody.put("model", "mistralai/mistral-7b-instruct:free");
             JSONArray messages = new JSONArray();
@@ -200,48 +254,75 @@ public class PronunciationTestActivity extends AppCompatActivity implements Phra
                 .url("https://openrouter.ai/api/v1/chat/completions")
                 .post(body)
                 .addHeader("Authorization", "Bearer " + OPENROUTER_API_KEY)
+                .addHeader("HTTP-Referer", "https://ailanguagetutor.example.com") 
+                .addHeader("X-Title", "AI Language Tutor")
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                 runOnUiThread(() -> tvAiFeedback.setText("Network Error"));
+                 runOnUiThread(() -> {
+                     tvGeneratedSentence.setText("Network Error");
+                     btnGenerateSentence.setEnabled(true);
+                 });
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (!response.isSuccessful()) {
-                    runOnUiThread(() -> tvAiFeedback.setText("API Error: " + response.code()));
+                    runOnUiThread(() -> {
+                        tvGeneratedSentence.setText("API Error: " + response.code());
+                        btnGenerateSentence.setEnabled(true);
+                    });
                     return;
                 }
                 try {
                     String responseData = response.body().string();
                     JSONObject jsonResponse = new JSONObject(responseData);
                     String content = jsonResponse.getJSONArray("choices").getJSONObject(0).getJSONObject("message").getString("content");
-                    runOnUiThread(() -> tvAiFeedback.setText(content));
+                    
+                    runOnUiThread(() -> parseAndDisplaySentence(content));
+                    
                 } catch (JSONException e) {
-                     runOnUiThread(() -> tvAiFeedback.setText("Parsing Error"));
+                     runOnUiThread(() -> {
+                         tvGeneratedSentence.setText("Parsing Error");
+                         btnGenerateSentence.setEnabled(true);
+                     });
                 }
             }
         });
     }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                startListening();
-            } else {
-                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
-            }
+    
+    private void parseAndDisplaySentence(String content) {
+        btnGenerateSentence.setEnabled(true);
+        // Expected format: Chinese ||| Pinyin ||| English
+        String[] parts = content.split("\\|\\|\\|");
+        
+        if (parts.length >= 3) {
+            tvGeneratedSentence.setText(parts[0].trim());
+            tvGeneratedSentence.setVisibility(View.VISIBLE);
+            btnSpeakSentence.setVisibility(View.VISIBLE);
+            
+            tvGeneratedPinyin.setText(parts[1].trim());
+            tvGeneratedPinyin.setVisibility(View.VISIBLE);
+            
+            tvTranslatedSentence.setText(parts[2].trim());
+            tvTranslateSentence.setVisibility(View.VISIBLE);
+            tvTranslateSentence.setText("Translate");
+            tvTranslatedSentence.setVisibility(View.GONE);
+        } else {
+            // Fallback if format is weird
+            tvGeneratedSentence.setText(content);
+            tvGeneratedSentence.setVisibility(View.VISIBLE);
+            btnSpeakSentence.setVisibility(View.VISIBLE);
         }
     }
 
     @Override
     protected void onDestroy() {
-        if (speechRecognizer != null) {
-            speechRecognizer.destroy();
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
         }
         super.onDestroy();
     }

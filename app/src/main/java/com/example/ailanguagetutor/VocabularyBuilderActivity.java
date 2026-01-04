@@ -31,7 +31,7 @@ import okhttp3.Response;
 public class VocabularyBuilderActivity extends AppCompatActivity {
 
     // Integrate the provided OpenRouter API Key
-    private static final String OPENROUTER_API_KEY = "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";
+    private static final String OPENROUTER_API_KEY = "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";
     private static final String SITE_URL = "https://ailanguagetutor.example.com"; // Optional, for OpenRouter rankings
     private static final String APP_NAME = "AI Language Tutor"; // Optional
 

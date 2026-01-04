@@ -1,6 +1,7 @@
 package com.example.ailanguagetutor;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,7 +31,9 @@ import okhttp3.Response;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private static final String OPENROUTER_API_KEY = "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";
+    private static final String OPENROUTER_API_KEY = "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";
+    // Switched to a more standard/available model ID
+    private static final String MODEL_ID = "mistralai/mistral-7b-instruct:free";
 
     private RecyclerView chatRecyclerView;
     private EditText etChatMessage;
@@ -90,17 +93,21 @@ public class ChatActivity extends AppCompatActivity {
         // Add a placeholder for the AI response
         addMessage("Typing...", ChatMessage.Sender.MODEL);
 
-        String prompt = "You are a friendly Chinese language tutor. The user said: '" + userMessage + "'. Respond naturally in Chinese. Keep your response to one or two short sentences.";
+        // Updated prompt to request translation separated by |||
+        String prompt = "You are a friendly Chinese language tutor. The user said: '" + userMessage + "'. " +
+                        "Respond naturally in Chinese. Then provide the English translation at the end, separated by '|||'. " +
+                        "Example format: [Chinese response]|||[English translation]. " +
+                        "Keep your response to one or two short sentences.";
 
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.put("model", "mistralai/mistral-7b-instruct:free");
+            jsonBody.put("model", MODEL_ID);
             JSONArray messages = new JSONArray();
             JSONObject systemMessage = new JSONObject();
-            systemMessage.put("role", "system");
+            systemMessage.put("role", "user"); 
             systemMessage.put("content", prompt);
             messages.put(systemMessage);
-            // You can add chat history here for better context
+            
             jsonBody.put("messages", messages);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -111,18 +118,41 @@ public class ChatActivity extends AppCompatActivity {
                 .url("https://openrouter.ai/api/v1/chat/completions")
                 .post(body)
                 .addHeader("Authorization", "Bearer " + OPENROUTER_API_KEY)
+                .addHeader("HTTP-Referer", "https://ailanguagetutor.example.com") 
+                .addHeader("X-Title", "AI Language Tutor")
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                updateLastMessage("Sorry, network error.");
+                Log.e("ChatActivity", "API Call Failed", e);
+                updateLastMessage("Sorry, network error: " + e.getMessage(), null);
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (!response.isSuccessful()) {
-                    updateLastMessage("Sorry, API error.");
+                    String errorBody = response.body() != null ? response.body().string() : "No details";
+                    Log.e("ChatActivity", "API Error: " + response.code() + " " + errorBody);
+                    
+                    String errorMessage = "API error: " + response.code();
+                    if (response.code() == 401) {
+                         errorMessage = "Invalid API Key. Please update OPENROUTER_API_KEY in ChatActivity.java";
+                    } else if (response.code() == 404) {
+                        errorMessage = "Model not found/available. Please try again later.";
+                    } else {
+                        try {
+                            JSONObject errorJson = new JSONObject(errorBody);
+                            if (errorJson.has("error")) {
+                                JSONObject errorObj = errorJson.getJSONObject("error");
+                                errorMessage += "\n" + errorObj.optString("message", "Unknown error");
+                            }
+                        } catch (JSONException e) {
+                             if (errorBody.length() < 100) errorMessage += "\n" + errorBody;
+                        }
+                    }
+                    
+                    updateLastMessage("Sorry, " + errorMessage, null);
                     return;
                 }
 
@@ -130,17 +160,35 @@ public class ChatActivity extends AppCompatActivity {
                     String responseData = response.body().string();
                     JSONObject jsonResponse = new JSONObject(responseData);
                     String content = jsonResponse.getJSONArray("choices").getJSONObject(0).getJSONObject("message").getString("content");
-                    updateLastMessage(content);
+                    
+                    // Parse content to separate Chinese and English
+                    String chineseText = content;
+                    String englishText = null;
+                    
+                    if (content.contains("|||")) {
+                        String[] parts = content.split("\\|\\|\\|");
+                        chineseText = parts[0].trim();
+                        if (parts.length > 1) {
+                            englishText = parts[1].trim();
+                        }
+                    }
+                    
+                    updateLastMessage(chineseText, englishText);
                 } catch (JSONException e) {
-                    updateLastMessage("Sorry, could not parse response.");
+                    Log.e("ChatActivity", "Parsing Error", e);
+                    updateLastMessage("Sorry, could not parse response.", null);
                 }
             }
         });
     }
 
-    private void updateLastMessage(String message) {
+    private void updateLastMessage(String message, String translation) {
         runOnUiThread(() -> {
-            messageList.get(messageList.size() - 1).setMessage(message);
+            ChatMessage chatMessage = messageList.get(messageList.size() - 1);
+            chatMessage.setMessage(message);
+            if (translation != null) {
+                chatMessage.setTranslatedMessage(translation);
+            }
             chatAdapter.notifyItemChanged(messageList.size() - 1);
         });
     }
