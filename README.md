@@ -1,63 +1,71 @@
 # AI Language Tutor
 
-Welcome to AI Language Tutor, a modern Android application designed to help users learn Chinese (Mandarin) through a suite of powerful, AI-driven tools. This app leverages various AI models via the OpenRouter API to provide an interactive and effective learning experience.
+AI Language Tutor is an Android application designed to help users learn Chinese through interactive AI-powered features. The app integrates advanced language models (via OpenRouter) and Text-to-Speech (TTS) capabilities to provide a comprehensive learning experience.
 
-## ✨ Features
+## Features
 
-*   **AI Grammar Correction**: Input any Chinese sentence and receive instant feedback on grammatical errors, including a detailed explanation and the corrected sentence.
-*   **AI Pronunciation Test**: Practice your speaking skills! Select a phrase, record your voice, and get a comprehensive analysis of your pronunciation from an AI coach, including a score out of 100, word-by-word feedback, and actionable tips.
-*   **AI Vocabulary Builder**: Generate dynamic word lists for different categories and HSK levels. Each word comes with its Hanzi, Pinyin, English meaning, and an example sentence.
-*   **Text-to-Speech (TTS)**: Hear the correct pronunciation of any AI-generated text or correction by simply tapping on it.
-*   **Dark Mode**: A fully functional, persistent dark mode for comfortable learning in any lighting condition.
-*   **Modern UI**: A clean, professional, and responsive user interface built with Material Design 3 principles.
+*   **AI Roleplay Chat**: Engage in natural conversations with an AI tutor in Chinese.
+    *   **Translation**: Translate user messages to Chinese and AI responses to English.
+    *   **Text-to-Speech**: Listen to the AI's Chinese responses with a single tap.
+*   **Pronunciation Test**: Practice speaking Chinese phrases.
+    *   **Speech Recognition**: Uses the device's speech recognizer to transcribe your pronunciation.
+    *   **AI Feedback**: Get detailed feedback and scoring on your pronunciation from the AI.
+    *   **AI Sentence Generation**: Generate example sentences using specific words, complete with Pinyin and English translation.
+    *   **Listen & Learn**: Hear the correct pronunciation of phrases and generated sentences.
+*   **Vocabulary Builder**: Generate custom vocabulary lists based on categories (e.g., Greetings, Food, Travel) and proficiency levels (HSK).
+*   **Grammar Correction**: Input sentences to get instant grammar corrections and explanations.
+*   **Progress Tracking**: (Visual placeholder) View stats like words learned, accuracy, and daily streaks.
+*   **Profile & Settings**: Manage user preferences, including a Dark Mode toggle.
 
-## 🛠️ Tech Stack & Architecture
+## Tech Stack
 
-*   **Language**: Java
-*   **Platform**: Android (Min SDK 24, Compile SDK 36)
-*   **AI Integration**: [OpenRouter API](https://openrouter.ai/) for access to various language models (e.g., Mistral, Gemini).
-*   **Networking**: OkHttp for robust and efficient API communication.
-*   **Speech Recognition**: Android's native `SpeechRecognizer` for capturing user voice input.
-*   **Text-to-Speech**: Android's native `TextToSpeech` engine for audio playback.
-*   **UI**: Android Jetpack (ConstraintLayout, CardView), Material Design 3 Components.
-*   **Persistence**: SharedPreferences for saving user preferences like the app theme.
+*   **Platform**: Android (Java)
+*   **Networking**: OkHttp for API requests.
+*   **AI Integration**: OpenRouter API (Mistral 7B / Google Gemma 2) for chat, feedback, and content generation.
+*   **Speech Services**:
+    *   `android.speech.SpeechRecognizer` for speech-to-text.
+    *   `android.speech.tts.TextToSpeech` for text-to-speech.
+*   **UI Components**: Material Design components, RecyclerView, ConstraintLayout.
 
-## 🚀 Setup & Installation
+## Setup & Installation
 
-To get the project up and running, follow these steps:
-
-1.  **Clone the Repository**
+1.  **Clone the Repository**:
     ```bash
-    git clone https://github.com/your-username/ai-language-tutor.git
+    git clone https://github.com/yourusername/AILanguageTutor.git
     ```
-
-2.  **Open in Android Studio**
+2.  **Open in Android Studio**:
     *   Launch Android Studio.
-    *   Select **File > Open** and navigate to the cloned project directory.
+    *   Select "Open" and navigate to the project directory.
+3.  **Configure API Key**:
+    *   The project uses OpenRouter for AI features.
+    *   Locate the `OPENROUTER_API_KEY` constant in the following files and ensure a valid key is set:
+        *   `ChatActivity.java`
+        *   `PronunciationTestActivity.java`
+        *   `VocabularyBuilderActivity.java`
+        *   `GrammarCorrectionActivity.java`
+    *   *Note: For security in a production app, use `local.properties` or a secure backend proxy.*
+4.  **Permissions**:
+    *   The app requires `Internet` and `Record Audio` permissions, which are declared in `AndroidManifest.xml`.
+    *   On Android 11+ (API 30+), ensure the Google App is installed/enabled for speech recognition visibility.
+5.  **Build and Run**:
+    *   Sync Gradle files.
+    *   Run the app on an Android Emulator or Physical Device.
+    *   *Note: For TTS to work, ensure a Chinese language pack is installed on the device's Text-to-Speech engine.*
 
-3.  **Add Your OpenRouter API Key**
-    *   Sign up on [OpenRouter.ai](https://openrouter.ai/) to get your free API key.
-    *   You need to add this key in three places in the project:
-        *   `app/src/main/java/com/example/ailanguagetutor/GrammarCorrectionActivity.java`
-        *   `app/src/main/java/com/example/ailanguagetutor/VocabularyBuilderActivity.java`
-        *   `app/src/main/java/com/example/ailanguagetutor/PronunciationTestActivity.java`
-    *   In each file, find the line `private static final String OPENROUTER_API_KEY = "sk-or-...";` and replace the key with your own.
+## Usage Guide
 
-4.  **Sync & Run**
-    *   Android Studio should prompt you to sync the Gradle project. If not, go to **File > Sync Project with Gradle Files**.
-    *   Connect an Android device or start an emulator.
-    *   Click the **Run** button (▶️) to build and install the app.
+*   **Chat**: Tap "AI Roleplay Chat" on the home screen. Type a message to start. Tap "Translate" under messages to see translations. Tap the speaker icon to hear the AI.
+*   **Pronunciation**: Tap "Pronunciation Test". Select a phrase, tap the microphone button, and speak. Wait for AI analysis. Use "Make a Sentence with AI" to expand your learning.
+*   **Vocab**: Tap "Vocabulary Builder" and select a category to get a generated list of words.
+*   **Grammar**: Tap "Grammar Correction", type a sentence, and hit "Check Grammar".
 
-## ⚠️ Permissions
+## Troubleshooting
 
-The app requires the following permissions, which are already declared in the `AndroidManifest.xml`:
-*   `android.permission.INTERNET`: To communicate with the OpenRouter API.
-*   `android.permission.RECORD_AUDIO`: For the Pronunciation Test feature.
+*   **API Error 401**: Your API Key is missing or invalid. Update the `OPENROUTER_API_KEY` constant in the relevant activity files.
+*   **API Error 404**: The selected AI model might be unavailable. Switch the `MODEL_ID` in the code to a different free model (e.g., `mistralai/mistral-7b-instruct:free`).
+*   **Voice Recognition Error**: Ensure you have granted microphone permissions and that the Google App is installed on your device.
+*   **No Sound**: Check your device volume and ensure a Text-to-Speech engine (like Google TTS) is installed and supports Chinese.
 
-## 🤝 Contributing
+## License
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/your-username/ai-language-tutor/issues).
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+[MIT License](LICENSE) (or your preferred license)
