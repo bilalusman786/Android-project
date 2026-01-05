@@ -2,6 +2,7 @@ package com.example.ailanguagetutor;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
@@ -42,7 +43,7 @@ public class PronunciationTestActivity extends AppCompatActivity implements Phra
 
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
     // API Key for OpenRouter
-    private static final String OPENROUTER_API_KEY = "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";
+    private static final String OPENROUTER_API_KEY = "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";
 
     private RecyclerView phrasesRecyclerView;
     private TextView tvSelectedHanzi, tvSelectedPinyin;
@@ -77,6 +78,8 @@ public class PronunciationTestActivity extends AppCompatActivity implements Phra
         btnSpeak.setOnClickListener(v -> {
             if (currentPhrase != null && tts != null) {
                 tts.speak(currentPhrase.getHanzi(), TextToSpeech.QUEUE_FLUSH, null, null);
+                // Simulate speaking practice boosting score
+                updateSpeakingScore();
             }
         });
         
@@ -104,6 +107,17 @@ public class PronunciationTestActivity extends AppCompatActivity implements Phra
                 tvTranslateSentence.setText("Hide Translation");
             }
         });
+    }
+
+    private void updateSpeakingScore() {
+        SharedPreferences prefs = getSharedPreferences("LinguaAiPrefs", MODE_PRIVATE);
+        float currentScore = prefs.getFloat("speaking_score", 7.5f);
+        // Slowly increase score up to 10.0
+        if (currentScore < 10.0f) {
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putFloat("speaking_score", Math.min(10.0f, currentScore + 0.1f));
+            editor.apply();
+        }
     }
 
     private void setupPhraseList() {

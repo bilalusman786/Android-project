@@ -80,9 +80,10 @@
                             android:text="@string/stat_words_learned"
                             android:textColor="@color/themed_text_secondary"/>
                         <TextView
+                            android:id="@+id/tvWordsLearned"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="158"
+                            android:text="0"
                             android:textSize="24sp"
                             android:textStyle="bold"/>
                     </LinearLayout>
@@ -107,9 +108,10 @@
                             android:text="@string/stat_accuracy"
                             android:textColor="@color/themed_text_secondary"/>
                         <TextView
+                            android:id="@+id/tvAccuracy"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="89%"
+                            android:text="0%"
                             android:textSize="24sp"
                             android:textStyle="bold"/>
                     </LinearLayout>
@@ -134,9 +136,10 @@
                             android:text="@string/stat_speaking_score"
                             android:textColor="@color/themed_text_secondary"/>
                         <TextView
+                            android:id="@+id/tvSpeakingScore"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="7.5/10"
+                            android:text="0/10"
                             android:textSize="24sp"
                             android:textStyle="bold"/>
                     </LinearLayout>
@@ -161,9 +164,10 @@
                             android:text="@string/stat_day_streak"
                             android:textColor="@color/themed_text_secondary"/>
                         <TextView
+                            android:id="@+id/tvDayStreak"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="12 Days"
+                            android:text="0 Days"
                             android:textSize="24sp"
                             android:textStyle="bold"/>
                     </LinearLayout>

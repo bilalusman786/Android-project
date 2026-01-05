@@ -1,5 +1,6 @@
 package com.example.ailanguagetutor;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
@@ -31,7 +32,7 @@ import okhttp3.Response;
 
 public class GrammarCorrectionActivity extends AppCompatActivity {
 
-    private static final String API_KEY = "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";
+    private static final String API_KEY = "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";
     private static final String SITE_URL = "https://ailanguagetutor.example.com"; // Optional
     private static final String APP_NAME = "AI Language Tutor"; // Optional
 
@@ -167,6 +168,9 @@ public class GrammarCorrectionActivity extends AppCompatActivity {
                             tvResult.setText(content);
                             btnCheckGrammar.setEnabled(true);
                             
+                            // Increase accuracy slightly as user practices
+                            updateAccuracyProgress();
+                            
                             // Also set click listener on text for TTS as fallback
                             tvResult.setOnClickListener(v -> {
                                  if (tts != null) {
@@ -184,6 +188,17 @@ public class GrammarCorrectionActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    
+    private void updateAccuracyProgress() {
+        SharedPreferences prefs = getSharedPreferences("LinguaAiPrefs", MODE_PRIVATE);
+        int currentAccuracy = prefs.getInt("accuracy", 85);
+        // Cap accuracy at 100
+        if (currentAccuracy < 100) {
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putInt("accuracy", currentAccuracy + 1);
+            editor.apply();
+        }
     }
 
     private void resetUIOnError(String errorMessage) {
