@@ -31,7 +31,7 @@ import okhttp3.Response;
 public class VocabularyBuilderActivity extends AppCompatActivity {
 
     // Integrate the provided OpenRouter API Key
-    private static final String OPENROUTER_API_KEY = "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";
+    private static final String OPENROUTER_API_KEY = "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";
     private static final String SITE_URL = "https://ailanguagetutor.example.com"; // Optional, for OpenRouter rankings
     private static final String APP_NAME = "AI Language Tutor"; // Optional
 
@@ -136,6 +136,8 @@ public class VocabularyBuilderActivity extends AppCompatActivity {
 
                     runOnUiThread(() -> {
                         loadingDialog.dismiss();
+                        // Update words learned progress
+                        updateWordsLearnedProgress(5);
                         showVocabularyDialog(category, content);
                     });
                 } catch (JSONException e) {
@@ -147,6 +149,15 @@ public class VocabularyBuilderActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void updateWordsLearnedProgress(int count) {
+        SharedPreferences prefs = getSharedPreferences("LinguaAiPrefs", MODE_PRIVATE);
+        int currentWords = prefs.getInt("words_learned", 0);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("words_learned", currentWords + count);
+        editor.apply();
+        Toast.makeText(this, "+" + count + " Words Learned!", Toast.LENGTH_SHORT).show();
     }
 
     private void showVocabularyDialog(String title, String content) {

@@ -1,5 +1,6 @@
 package com.example.ailanguagetutor;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,7 +32,7 @@ import okhttp3.Response;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private static final String OPENROUTER_API_KEY = "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";
+    private static final String OPENROUTER_API_KEY = "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";
     // Switched to a more standard/available model ID
     private static final String MODEL_ID = "mistralai/mistral-7b-instruct:free";
 
@@ -79,8 +80,19 @@ public class ChatActivity extends AppCompatActivity {
         addMessage(messageText, ChatMessage.Sender.USER);
         etChatMessage.setText("");
 
+        // Update stats
+        updateMessagesSentCounter();
+
         // Get AI response
         getAiResponse(messageText);
+    }
+
+    private void updateMessagesSentCounter() {
+        SharedPreferences prefs = getSharedPreferences("LinguaAiPrefs", MODE_PRIVATE);
+        int currentCount = prefs.getInt("messages_sent", 0);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("messages_sent", currentCount + 1);
+        editor.apply();
     }
 
     private void addMessage(String message, ChatMessage.Sender sender) {
