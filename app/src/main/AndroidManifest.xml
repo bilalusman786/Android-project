@@ -44,7 +44,10 @@
         <activity android:name=".GrammarCorrectionActivity" />
         <activity android:name=".ProgressActivity" />
         <activity android:name=".ProfileActivity" />
+        <activity android:name=".EditProfileActivity" />
         <activity android:name=".ChatActivity" />
+        <activity android:name=".SupportActivity" />
+        <activity android:name=".NotepadActivity" />
         
     </application>
 

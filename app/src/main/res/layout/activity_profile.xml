@@ -24,6 +24,7 @@
         android:backgroundTint="#33FFFFFF"
         android:padding="8dp"
         android:src="@drawable/ic_back"
+        android:contentDescription="Go back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +35,7 @@
         android:layout_marginStart="16dp"
         android:text="@string/profile_title"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/ivBack"
         app:layout_constraintStart_toEndOf="@id/ivBack"
@@ -59,8 +60,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@color/themed_surface"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -70,33 +71,46 @@
                     android:padding="24dp">
 
                     <FrameLayout
-                        android:layout_width="80dp"
-                        android:layout_height="80dp">
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="8dp">
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/splash_dot"
-                            android:backgroundTint="#FFCCBC" />
+                            android:background="@drawable/bg_home_card"
+                            android:backgroundTint="#FFCCBC"
+                            android:layout_margin="2dp"/>
 
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:id="@+id/ivProfileImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/bg_home_card"
+                            android:clipToOutline="true" />
+
+                        <ImageView
+                            android:id="@+id/ivProfilePlaceholder"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_settings_person"
                             app:tint="#D84315" />
                     </FrameLayout>
 
                     <TextView
+                        android:id="@+id/tvProfileName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text="@string/home_user_name"
                         android:textColor="@color/themed_text_primary"
-                        android:textSize="20sp"
+                        android:textSize="22sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvProfileEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -105,16 +119,21 @@
                         android:textSize="14sp" />
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEditProfile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="20dp"
                         android:backgroundTint="#FFF3E0"
                         android:text="@string/edit_profile"
                         android:textColor="#D84315"
-                        android:textSize="12sp"
-                        app:cornerRadius="20dp"
+                        android:textSize="14sp"
+                        android:paddingHorizontal="24dp"
+                        android:paddingVertical="10dp"
+                        app:cornerRadius="24dp"
                         app:strokeColor="#FFCCBC"
-                        app:strokeWidth="1dp" />
+                        app:strokeWidth="1dp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -123,10 +142,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="12dp"
                 android:text="@string/section_preferences"
                 android:textColor="@color/themed_text_secondary"
-                android:textSize="12sp"
+                android:textSize="13sp"
+                android:letterSpacing="0.1"
                 android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
@@ -146,7 +166,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:padding="16dp">
+                        android:padding="16dp"
+                        android:background="?attr/selectableItemBackground">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -172,13 +193,15 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#F0F0F0" />
+                        android:background="#F0F0F0"
+                        android:layout_marginHorizontal="16dp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:padding="16dp">
+                        android:padding="16dp"
+                        android:background="?attr/selectableItemBackground">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -208,10 +231,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="12dp"
                 android:text="@string/section_settings"
                 android:textColor="@color/themed_text_secondary"
-                android:textSize="12sp"
+                android:textSize="13sp"
+                android:letterSpacing="0.1"
                 android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
@@ -229,10 +253,14 @@
 
                     <!-- Language -->
                     <LinearLayout
+                        android:id="@+id/setting_language"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:padding="16dp">
+                        android:padding="16dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackground">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -266,14 +294,18 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#F0F0F0" />
+                        android:background="#F0F0F0"
+                        android:layout_marginHorizontal="16dp"/>
 
                     <!-- Privacy -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:padding="16dp">
+                        android:padding="16dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackground">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -298,14 +330,19 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#F0F0F0" />
+                        android:background="#F0F0F0"
+                        android:layout_marginHorizontal="16dp"/>
 
                     <!-- Help -->
                     <LinearLayout
+                        android:id="@+id/setting_help"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:padding="16dp">
+                        android:padding="16dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackground">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -334,18 +371,21 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSignOut"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="60dp"
                 android:layout_marginBottom="16dp"
                 android:backgroundTint="@color/themed_surface"
                 android:text="@string/sign_out"
                 android:textColor="#D32F2F"
                 android:textSize="16sp"
-                app:cornerRadius="12dp"
+                app:cornerRadius="16dp"
                 app:icon="@drawable/ic_security" 
                 app:iconTint="#D32F2F"
                 app:iconGravity="textStart"
                 app:strokeColor="#D32F2F"
-                app:strokeWidth="1dp" />
+                app:strokeWidth="1dp"
+                android:elevation="2dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -354,7 +394,8 @@
                 android:layout_marginBottom="24dp"
                 android:text="@string/app_version"
                 android:textColor="@color/themed_text_secondary"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:alpha="0.7"/>
 
         </LinearLayout>
     </ScrollView>
