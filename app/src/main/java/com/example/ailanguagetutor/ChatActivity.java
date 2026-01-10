@@ -32,7 +32,7 @@ import okhttp3.Response;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private static final String OPENROUTER_API_KEY = "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";
+    private static final String OPENROUTER_API_KEY = "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";
     // Switched to a more standard/available model ID
     private static final String MODEL_ID = "mistralai/mistral-7b-instruct:free";
 
@@ -149,7 +149,9 @@ public class ChatActivity extends AppCompatActivity {
                     
                     String errorMessage = "API error: " + response.code();
                     if (response.code() == 401) {
-                         errorMessage = "Invalid API Key. Please update OPENROUTER_API_KEY in ChatActivity.java";
+                         // Show part of the key so user can verify
+                         String keyPreview = OPENROUTER_API_KEY.length() > 10 ? OPENROUTER_API_KEY.substring(0, 10) + "..." : OPENROUTER_API_KEY;
+                         errorMessage = "Invalid API Key (" + keyPreview + "). Please check ChatActivity.java";
                     } else if (response.code() == 404) {
                         errorMessage = "Model not found/available. Please try again later.";
                     } else {

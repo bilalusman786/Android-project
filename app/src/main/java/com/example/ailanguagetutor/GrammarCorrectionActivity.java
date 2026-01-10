@@ -11,7 +11,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import org.json.JSONArray;
@@ -30,9 +29,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class GrammarCorrectionActivity extends AppCompatActivity {
+public class GrammarCorrectionActivity extends BaseActivity {
 
-    private static final String API_KEY = "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";
+    private static final String API_KEY = "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";
     private static final String SITE_URL = "https://ailanguagetutor.example.com"; // Optional
     private static final String APP_NAME = "AI Language Tutor"; // Optional
 
